@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:CognitivePOC_PCL" x:Class="CognitivePOC_PCL.Pages.CognitivePOC_PCLPage" xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" Title="Cool Beans" >
+    <StackLayout>
+        <Grid ColumnSpacing="2" Padding="0,25,0,0" HeightRequest="150" HorizontalOptions="FillAndExpand" >
+            <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="2*" />
+                 <ColumnDefinition Width="*" />
+                 <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+      
+	
+		
+			<StackLayout Orientation="Vertical" Grid.Column="0" VerticalOptions="StartAndExpand" HorizontalOptions="Center" >
+			    <Label Text="Cognitive Stuff!" VerticalOptions="Start" HorizontalOptions="Center" TextColor="Green" FontSize="16" />
+        	    <Image x:Name="setImage" Source="{Binding setImage}" HeightRequest="80" WidthRequest="80" Aspect="AspectFit" />
+			</StackLayout>
+		
+
+			<StackLayout Orientation="Vertical" Grid.Column="1" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Spacing="2" >
+				<Button x:Name="picButton" Text="Take Seflie!" VerticalOptions="Center" HorizontalOptions="Center" BorderColor="Green" TextColor="Navy" BorderWidth="2" WidthRequest="80" HeightRequest="40" FontSize="Micro" Command="{Binding TakePhotoCommand}" Margin="5" />
+        		<Button x:Name="pickButton" Text="Pick Seflie!" VerticalOptions="Center" HorizontalOptions="Center" BorderColor="Green" TextColor="Navy" BorderWidth="2" WidthRequest="80" HeightRequest="40" FontSize="Micro" Command="{Binding PickPhotoCommand}" Margin="5"/>
+                
+			</StackLayout>
+		
+
+			<StackLayout Orientation="Vertical" Grid.Column="2" VerticalOptions="StartAndExpand" HorizontalOptions="Center" Spacing="2">
+                <Button x:Name="identifyButton" HorizontalOptions="Center" Text="Identify" BorderColor="Green" TextColor="Navy" WidthRequest="80" BorderWidth="2" HeightRequest="40" Margin="5" Command="{Binding IdentifyCommand}"  />
+				<Button x:Name="resetButton" Text="Reset"  VerticalOptions="EndAndExpand" HorizontalOptions="Center" BorderColor="Silver" TextColor="Silver" BorderWidth="2" WidthRequest="80" HeightRequest="40" Command="{Binding ResetCommand}" Margin="5" />
+			</StackLayout>
+
+            <StackLayout Orientation="Vertical" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center" Spacing="2">
+                <ActivityIndicator x:Name="spinner" Color="Gray" VerticalOptions="Start" HorizontalOptions="Center" IsEnabled="{Binding SpinnerOn}" IsVisible="{Binding SpinnerOn}" IsRunning="{Binding SpinnerOn}"/>
+                <Label VerticalOptions="Start" Text="{Binding EmotionLabel}" HorizontalOptions="Center" x:Name="emotionResultLabel" TextColor="Navy" FontSize="14"/>
+                <Label VerticalOptions="Center" Text="{Binding EmotionEmojiLabel}" HorizontalOptions="Center" x:Name="emojiLabel" FontSize="18" />
+            </StackLayout>
+
+              </Grid>
+
+              <ContentView HeightRequest="1" BackgroundColor="Navy" HorizontalOptions="FillAndExpand"/>
+
+        
+	<StackLayout>
+
+	<!--	IsRefreshing="{Binding IsBusyRefreshing, Mode=OneWay}"
+		RefreshCommand="{Binding RefreshRegistrants}"
+		ItemSelected="OnItemSelected"-->
+		
+		<ListView 
+				x:Name="personsListView"
+				BackgroundColor="Transparent"
+				CachingStrategy="RecycleElement"
+				HasUnevenRows="false"
+				IsPullToRefreshEnabled="false"
+                ItemsSource="{Binding Persons}"
+				RowHeight="120"
+				SeparatorVisibility="Default">
+						<ListView.SeparatorColor>
+							<OnPlatform x:TypeArguments="Color" iOS="Silver" Android="Transparent" />
+						</ListView.SeparatorColor>
+
+				<ListView.ItemTemplate>
+	              <DataTemplate>
+					<ViewCell x:Name="personsViewCell">
+					<!--<ViewCell.ContextActions>
+						<MenuItem Text="Check In"		
+									  BindingContext="{Binding Source={x:Reference registrantsListView}, Path=BindingContext}"
+					                  Command="{Binding IsHereToggleCommand}" 
+					                  CommandParameter="{Binding Source={x:Reference registrantViewCell}, Path=BindingContext}"
+									   />
+					</ViewCell.ContextActions>	-->
+	                <Grid Padding="16, 10, 10, 10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ColumnSpacing="8" >
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+							<Label x:Name="lblName" Text="{Binding FirstName}" TextColor="Navy" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Start" />		
+                            
+
+                            <ffimageloading:CachedImage Grid.Column="1" HorizontalOptions="End" Aspect="AspectFit" VerticalOptions="Center" DownsampleToViewSize="true" Source="{Binding PhotoURL}" WidthRequest="85" HeightRequest="85" />
+                     </Grid>
+					</ViewCell>			
+	              </DataTemplate>
+	            </ListView.ItemTemplate>
+	          </ListView>
+	</StackLayout>
+
+   </StackLayout>     
+</ContentPage>
