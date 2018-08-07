@@ -6,11 +6,9 @@ using Microsoft.ProjectOxford.Face;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using Xamarin.Forms;
-
 using System.Linq;
 using System.Threading.Tasks;
 using Plugin.Media;
-
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Common;
 using System.Collections.ObjectModel;
@@ -73,7 +71,6 @@ namespace CognitivePOC_PCL.PageModels
         protected override  void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
-
         }
 
         public ICommand TakePhotoCommand
@@ -138,25 +135,17 @@ namespace CognitivePOC_PCL.PageModels
                 return identifyCommand ?? (identifyCommand = new Command(async () =>
                 {
                     ActivateSpinner();
+                    try
+                    {
+						await RegisterEmployees();
 
-                    await RegisterEmployees();
+						await ExecuteFindSimilarFaceCommandAsync();
 
-                    await ExecuteFindSimilarFaceCommandAsync();
-
+                    } catch (Exception ex) { Debug.WriteLine(ex.Message+"  "+ex.InnerException);}
                     DeactivateSpinner();
                 }));
             }
         }
-
-
-       
-
-
-
-
-
-
-
 
 
 

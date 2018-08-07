@@ -154,6 +154,12 @@
     <Reference Include="FFImageLoading.Forms.Droid">
       <HintPath>..\packages\Xamarin.FFImageLoading.Forms.2.2.9\lib\MonoAndroid10\FFImageLoading.Forms.Droid.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.TextToSpeech.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.TextToSpeech.2.0.0\lib\MonoAndroid10\Plugin.TextToSpeech.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.TextToSpeech">
+      <HintPath>..\packages\Xam.Plugins.TextToSpeech.2.0.0\lib\MonoAndroid10\Plugin.TextToSpeech.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CognitivePOC_PCL\CognitivePOC_PCL.csproj">
